@@ -4,8 +4,8 @@ const CardBody = ({name, address}) => {
   return (
     <>
         <div className='px-4 '>
-            <h1 className='text-5xl font-semibold'>{name}</h1>
-            <p className='px-2 mt-3 text-gray-600'>{address}</p>
+            <h1 className='text-5xl font-semibold text-black'>{name}</h1>
+            <p className='px-2 mt-3 text-black'>{address}</p>
         </div>
 
     </>
@@ -14,3 +14,5 @@ const CardBody = ({name, address}) => {
 }
 
 export default CardBody
+
+// text-[#E1E1E1] address

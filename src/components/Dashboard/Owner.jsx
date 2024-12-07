@@ -10,8 +10,8 @@ const Owner = ({data}) => {
       <div>
         <Header/>
         <BuildingCard data={data} />
-        <BuildingDropdown name="Building 1"/>
-        <BuildingDropdown name="Building 2"/>
+        {/* <BuildingDropdown name="Building 1"/>
+        <BuildingDropdown name="Building 2"/> */}
       </div>
     </>
   )

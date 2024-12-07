@@ -2,8 +2,8 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div className='flex items-center justify-between px-7 py-4 border-b-4 border-black '>
-        <div className='font-semibold'>RentEase</div>
+    <div className='bg-[#373737] flex items-center justify-between px-7 py-4 shadow-lg shadow-red-200'>
+        <div className='font-semibold text-[#fc8686]'>RentEase</div>
         <div><i class="fa-solid fa-bars"></i></div>
     </div>
   )

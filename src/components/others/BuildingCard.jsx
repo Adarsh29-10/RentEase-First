@@ -16,9 +16,9 @@ const BuildingCard = ({data}) => {
 
   return (
     <>
-      <div className=' flex mt-10 mb-24 overflow-x-auto h-[300px]'>
+      <div className=' flex mt-10 mb-24 overflow-x-auto'>
 
-        {data?.map((e) => <>{<Card name={e.name} address={e.address} rooms={e.rooms} tenants={e.tenants} />}</>)}
+        {data?.map((e) => <>{<Card name={e.name} address={e.address} rooms={e.rooms} area={e.area} />}</>)}
 
 
         <AddBuildingCard />

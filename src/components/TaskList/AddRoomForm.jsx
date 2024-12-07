@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Header from '../others/Header'
 
-const NewRoomTask = () => {
+const AddRoomForm = () => {
 
     let handelSubmit = (event) =>{
         event.preventDefault();
@@ -84,4 +84,4 @@ const NewRoomTask = () => {
     )
 }
 
-export default NewRoomTask
+export default AddRoomForm

@@ -2,7 +2,7 @@ import React from 'react'
 
 const ManageButton = () => {
   return (
-    <button className='w-[300px] bg-black text-white rounded py-3 mt-5 rounded-b-xl'>Manage</button>
+    <button className='absolute w-full bg-black text-white rounded  bottom-0 p-2.5  overflow-hidden rounded-b-xl'>Manage</button>
   )
 }
 
