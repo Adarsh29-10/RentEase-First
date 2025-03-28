@@ -7,6 +7,7 @@ const Owner = ({data}) => {
     <>
       
         <Header/>
+        
         <BuildingCardDiv data={data} />
        
       

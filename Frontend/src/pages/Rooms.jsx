@@ -1,10 +1,35 @@
-
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import Header from '../components/others/Header.jsx'
 import RoomView from './RoomView.jsx'
 import RCard from '../components/others/Room-card/RCard.jsx'
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
-const Rooms = () => {
+
+const Rooms = ({data}) => {
+
+    const navigate = useNavigate();
+    const handelNavigate = () => {
+        navigate('/add-new-room')
+    }
+    
+    const {id} = useParams();
+    const [property, setProperty] = useState('');
+
+    useEffect(()=>{
+        const fetchProperties = async () =>{
+            try{
+                const response = await axios.get(`/api/properties/${id}`);
+                console.log(response.data.properties);
+                setProperty(response.data.properties);
+            } catch(error){
+                console.error(error);
+            }
+        }
+
+        fetchProperties();
+    }, [id]);
+
   return (
     <div className='relative h-screen w-full overflow-x-hidden '>
         <Header />
@@ -12,8 +37,12 @@ const Rooms = () => {
         <div className=' py-9'>
 
             <div className='bg-transparent p-7 flex align-center justify-between mt-3  w-full'>
-                <h1 className='font-bold text-3xl font-sans'>Rooms of Property 1</h1>
+                <h1 className='font-bold text-3xl font-sans'>Rooms of {property.name}
+                </h1>
             </div>
+                <h1 className='font-bold text-3xl font-sans'>
+                    {/* {id} */}
+                </h1>
 
             <div className='flex'>
                 <RCard 
@@ -34,10 +63,13 @@ const Rooms = () => {
 
                 <RCard 
                     roomNo = "Room 3" 
-                    name="Kshitij Raghuwanshi" 
-                    contact={9562585485} 
-                    tStatus="Family" 
-                    bill={"Not Paid"}     
+                    // name="Kshitij Raghuwanshi" 
+                    // contact={9562585485} 
+                    // tStatus="Family" 
+                    // bill={"Not Paid"}
+
+                    empty="Empty"
+
                 />
                 
             </div>
@@ -48,7 +80,7 @@ const Rooms = () => {
 
         </div>
        
-        <div className='absolute'><i className="fixed fa-solid fa-circle-plus text-8xl bottom-12 right-12 "></i></div>   
+        <div onClick={handelNavigate}  className='absolute'><i className="fixed fa-solid fa-circle-plus text-8xl bottom-12 right-12 "></i></div>   
 
     </div>
   )

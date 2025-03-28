@@ -22,16 +22,16 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
     }
 
     const propertyData = {
-      propertyName: name,
+      name: name,
       address: address,
-      totalRooms: parseInt(rooms),
-      totalArea: area,
+      rooms: parseInt(rooms),
+      area: area,
     };
 
     setLoading(true);  // Start loading
 
     try {
-      const response = await axios.post('http://localhost:8080/api/properties/add', propertyData);
+      const response = await axios.post('/api/add', propertyData);
       
       if (response.status === 201) {
         alert('Property added successfully!');
@@ -39,8 +39,13 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
       }
     } catch (error) {
       console.error('Error adding property:', error);
-      alert('Failed to add property. Please try again.');
-    } finally {
+      if (error.response && error.response.data && error.response.data.message) {
+          alert(`Failed to add property: ${error.response.data.message}`);
+      } else {
+          alert('Failed to add property. Please try again.');
+      }
+    }
+    finally {
       setLoading(false);  // Stop loading
     }
   };

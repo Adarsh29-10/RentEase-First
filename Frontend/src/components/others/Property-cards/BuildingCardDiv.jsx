@@ -10,7 +10,7 @@ const BuildingCardDiv = ({data}) => {
     <>
       <div id='buildingCardDiv' className='h-[30rem] pt-10 flex mt-10 mb-24 overflow-x-auto '>
 
-        {data?.map((e) => <>{<BCard name={e.name} address={e.address} rooms={e.rooms} area={e.area} redirectTo={e.redirectTo}/>}</>)}
+        {data?.map((e) => <>{<BCard id={e._id} name={e.name} address={e.address} rooms={e.rooms} area={e.area} redirectTo={e.redirectTo}/>}</>)}
 
 
         <AddBuildingCard />
