@@ -43,7 +43,7 @@ const Login = () => {
                 </div>
                 
                 <form 
-                    className='bg-gray-100 border-2 border-gray-400 shadow-md w-[30rem]  py-8  px-8 flex flex-col text-3xl rounded-xl'
+                    className='bg-gray-200  border-gray-400 shadow-md w-[30rem]  py-8  px-8 flex flex-col text-3xl rounded-xl'
                     onSubmit={(e)=>submitHandler(e)} 
                 >
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import Header from '../others/Header';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const AddPropertyForm = () => {  // Removed handleChange as a prop
+const AddPropertyForm = ({ Close }) => {
+
+  
+
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [rooms, setRooms] = useState('');
@@ -12,41 +14,45 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {  // Corrected function name
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
     
-    // Check if all fields are filled
+    
     if (!name || !address || !rooms || !area) {
       alert('Please fill all the fields.');
       return;
     }
-
-    const propertyData = {
-      name: name,
-      address: address,
-      rooms: parseInt(rooms),
-      area: area,
-    };
-
-    setLoading(true);  // Start loading
-
+    
+    setLoading(true);
+    
     try {
-      const response = await axios.post('/api/add', propertyData);
       
+
+      const propertyData = {
+        name: name,
+        address: address,
+        rooms: parseInt(rooms),
+        area: area,
+        
+      };
+      // Make the API call
+      const response = await axios.post('http://localhost:8080/api/add', propertyData);
+
       if (response.status === 201) {
         alert('Property added successfully!');
-        navigate('/OwnerDashboard');  // Redirecting to OwnerDashboard
+        navigate('/OwnerDashboard');
+        Close(); // Close modal after successful submission
       }
     } catch (error) {
       console.error('Error adding property:', error);
-      if (error.response && error.response.data && error.response.data.message) {
-          alert(`Failed to add property: ${error.response.data.message}`);
+      if (error.response?.data?.message) {
+        alert(`Failed to add property: ${error.response.data.message}`);
       } else {
-          alert('Failed to add property. Please try again.');
+        alert('Failed to add property. Please try again.');
       }
-    }
-    finally {
-      setLoading(false);  // Stop loading
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,18 +64,32 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
   };
 
   return (
-    <div className="pt-20 overflow-hidden">
-      <Header />
-      <div className="p-10">
-        <h1 className="text-3xl font-bold mb-6 text-center">Add New Building</h1>
+    <div className="fixed inset-0 bg-gray-700 bg-opacity-50 z-50 flex items-center justify-center p-4">
+      {/* Modal Container - Centered with max-width and better UI */}
+      <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-xl overflow-hidden">
+        {/* Modal Header with Close Button */}
+        <div className="flex justify-between items-center p-4 border-b">
+          <h1 className="text-2xl font-bold text-gray-800">Add New Property</h1>
+          {/* Close Button (X) in top-right corner */}
+          <button
+            onClick={Close}
+            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+            aria-label="Close modal"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
 
-        <div className="max-w-4xl mx-auto bg-gray-100 shadow-lg rounded-lg p-8">
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Modal Content */}
+        <div className="p-6">
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Property Name */}
-            <div className="flex flex-col">
-              <label htmlFor="name" className="text-lg font-semibold mb-2">Property Name</label>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="name" className="text-sm font-medium text-gray-700 mb-1">Property Name</label>
               <input
-                className="text-black placeholder-gray-500 border border-gray-400 rounded-md px-4 py-2"
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="Enter Building Name"
                 id="name"
                 value={name}
@@ -78,10 +98,10 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
             </div>
 
             {/* Address */}
-            <div className="flex flex-col">
-              <label htmlFor="address" className="text-lg font-semibold mb-2">Address</label>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="address" className="text-sm font-medium text-gray-700 mb-1">Address</label>
               <input
-                className="text-black placeholder-gray-500 border border-gray-400 rounded-md px-4 py-2"
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="Enter Address"
                 id="address"
                 value={address}
@@ -90,11 +110,11 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
             </div>
 
             {/* Total Rooms */}
-            <div className="flex flex-col">
-              <label htmlFor="rooms" className="text-lg font-semibold mb-2">Total Rooms</label>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="rooms" className="text-sm font-medium text-gray-700 mb-1">Total Rooms</label>
               <input
                 type="number"
-                className="text-black placeholder-gray-500 border border-gray-400 rounded-md px-4 py-2"
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="Enter Total Rooms"
                 id="rooms"
                 value={rooms}
@@ -103,10 +123,10 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
             </div>
 
             {/* Total Area */}
-            <div className="flex flex-col">
-              <label htmlFor="area" className="text-lg font-semibold mb-2">Total Area</label>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="area" className="text-sm font-medium text-gray-700 mb-1">Total Area</label>
               <input
-                className="text-black placeholder-gray-500 border border-gray-400 rounded-md px-4 py-2"
+                className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 placeholder="Enter Total Area (e.g., 1200 sqft)"
                 id="area"
                 value={area}
@@ -115,20 +135,28 @@ const AddPropertyForm = () => {  // Removed handleChange as a prop
             </div>
 
             {/* Buttons */}
-            <div className="col-span-2 flex justify-between items-center mt-6">
+            <div className="col-span-2 flex justify-end space-x-3 mt-4">
               <button
                 type="button"
                 onClick={handleReset}
-                className="bg-gray-400 text-white px-6 py-2 rounded-md hover:bg-gray-500"
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
               >
                 Reset
               </button>
               <button
                 type="submit"
-                className="bg-pink-600 text-white px-6 py-2 rounded-md hover:bg-pink-700"
+                className="px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-red-500"
                 disabled={loading}
               >
-                {loading ? 'Saving...' : 'Submit'}
+                {loading ? (
+                  <span className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Saving...
+                  </span>
+                ) : 'Submit'}
               </button>
             </div>
           </form>

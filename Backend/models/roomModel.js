@@ -8,6 +8,11 @@ const roomSchema = new mongoose.Schema({
     roomTStatus : { type: String, required: true},  //room tenant status
     roomSize : { type: String, required: true},
     roomPrice : { type: String, required: true},
-});
+
+    property : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Property' 
+    }
+}, {timestamps: true});
 
 module.exports = mongoose.model('Room', roomSchema);

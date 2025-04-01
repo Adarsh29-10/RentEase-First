@@ -1,97 +1,82 @@
-import React, { useEffect, useState } from 'react'
-import Login from './components/Auth/Login'
-import Owner from './components/Dashboard/Owner'
-import AddPropertyForm from './components/TaskList/addPropertyForm'
-import AddRoomForm from './components/TaskList/addRoomForm'
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+import LandingPage from './components/Dashboard/LandiingPage';
+import Login from './components/Auth/Login';
+import Owner from './components/Dashboard/Owner';
+import AddPropertyForm from './components/TaskList/AddPropertyForm.jsx';
+import AddRoomForm from './components/TaskList/addRoomForm';
+import Rooms from './pages/Rooms';
+import TenantReg from './components/Auth/TenantReg';
+import OwnerReg from './components/Auth/OwnerReg';
+import Tenant from './components/Dashboard/Tenant';
+import LoadingSpinner from './components/others/LoadingSpinner';
+// import ErrorMessage from './components/others/ErrorMessage';
 
-import { Routes } from 'react-router-dom'
-import { Route } from 'react-router-dom'
-import Rooms from './pages/Rooms'
-import TenantReg from './components/Auth/TenantReg'
-import OwnerReg from './components/Auth/OwnerReg'
-import Tenant from './components/Dashboard/Tenant'
+import AuthPage from './pages/AuthPage';
+import AuthContainer from './components/Auth/New/AuthContainer';
 
-
-import axios from "axios";
 
 
 
 const App = () => {
-  
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  
-  useEffect(()=>{
-    const fetchProperties = async () => {
-      try{
-        setLoading(true);
-        setError(false);
-        const response = await axios.get('/api/properties');
-        console.log(response.data.properties);
-        setData(response.data.properties);
-       
-        setLoading(false);
-      } catch(error){
-        setError(true);
-        setLoading(false);
-      }
+
+  const fetchProperties = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.get(' http://localhost:8080/api/properties');
+      setData(response.data.properties);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to fetch properties');
+    } finally {
+      setLoading(false);
     }
-    {loading && <h1>Loading...</h1>}
-    {error && <h1>Something went wrong while fetching properties.</h1>}
-    
-     
+  };
+
+  useEffect(() => {
     fetchProperties();
-    
   }, []);
-  
-  
-  
+
+  const handlePropertyAdded = (newProperty) => {
+    setData([...data, newProperty]);
+  };
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage message={error} onRetry={fetchProperties} />;
 
   return (
-    <>
-      
-      
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/TenantRegistration' element={<TenantReg />} />
-        <Route path='/OwnerRegistration' element={<OwnerReg />} />
-        <Route path='/OwnerDashboard' element={<Owner data={data}  />} />
-        <Route path='/TenantDashboard' element={ <Tenant/> } />
-        <Route path='/add-new-property' element={<AddPropertyForm handleChange={setData} />} />
-        <Route path='/manage-rooms/:id' element={<Rooms data={data}/> } />
-        <Route path='/add-new-room' element={<AddRoomForm />} />
-      </Routes>
-      
-    </>
-  )
-}
+    
+    <Routes>
+      <Route path='/' element={<AuthPage />} />
+      {/* <Route path='/' element={<Login />} /> */}
+      <Route path='/TenantRegistration' element={<TenantReg />} />
+      <Route path='/OwnerRegistration' element={<OwnerReg />} />
+      <Route 
+        path='/OwnerDashboard' 
+        element={
+          <Owner data={data}/>
+        } 
+        
+      />
+      <Route path='/TenantDashboard' element={<Tenant properties={data} />} />
+      <Route 
+        path='/add-new-property' 
+        element={<AddPropertyForm onSuccess={handlePropertyAdded} />} 
+      />
+      <Route 
+        path='/manage-rooms/:id' 
+        element={<Rooms data={data} onDataUpdate={fetchProperties} />} 
+      />
+      <Route 
+        path='/add-new-room' 
+        element={<AddRoomForm onSuccess={fetchProperties} />} 
+      />
+    </Routes>
+  );
+};
 
-export default App
-
-
-// const [bData, setBdata] = useState(
-//   [
-//     {
-//       "name": "Property 1",
-//       "address": "Vijay Nagar, Indore",
-//       "rooms": 4,
-//       "area": "2000 sq ft",
-//       "color": "",
-//       "redirectTo": '/manage-rooms' 
-//     },
-//     {
-//       "name": "Property 2",
-//       "address": "Ghatabillod, Dhar",
-//       "rooms": 2,
-//       "area": "1500 sq ft",
-//       "color": ""
-//     },
-//     {
-//       "name": "Property 3",
-//       "address": "Indorama",
-//       "rooms": 5,
-//       "area": "1600 sq ft",
-//       "color": ""
-//     }
-//   ]
+export default App;
