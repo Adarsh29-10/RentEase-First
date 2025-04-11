@@ -4,8 +4,8 @@ import axios from 'axios';
 import LandingPage from './components/Dashboard/LandiingPage';
 import Login from './components/Auth/Login';
 import Owner from './components/Dashboard/Owner';
-import AddPropertyForm from './components/TaskList/AddPropertyForm.jsx';
-import AddRoomForm from './components/TaskList/addRoomForm';
+import AddPropertyForm from './components/TaskList/addPropertyForm';
+import AddRoomModal from './components/TaskList/AddRoomModal.jsx';
 import Rooms from './pages/Rooms';
 import TenantReg from './components/Auth/TenantReg';
 import OwnerReg from './components/Auth/OwnerReg';
@@ -52,9 +52,11 @@ const App = () => {
     
     <Routes>
       <Route path='/' element={<AuthPage />} />
+
       {/* <Route path='/' element={<Login />} /> */}
-      <Route path='/TenantRegistration' element={<TenantReg />} />
-      <Route path='/OwnerRegistration' element={<OwnerReg />} />
+      {/* <Route path='/TenantRegistration' element={<TenantReg />} /> */}
+      {/* <Route path='/OwnerRegistration' element={<OwnerReg />} /> */}
+      
       <Route 
         path='/OwnerDashboard' 
         element={
@@ -71,10 +73,10 @@ const App = () => {
         path='/manage-rooms/:id' 
         element={<Rooms data={data} onDataUpdate={fetchProperties} />} 
       />
-      <Route 
+      {/* <Route 
         path='/add-new-room' 
-        element={<AddRoomForm onSuccess={fetchProperties} />} 
-      />
+        element={<AddRoomModal onSuccess={fetchProperties} />} 
+      /> */}
     </Routes>
   );
 };

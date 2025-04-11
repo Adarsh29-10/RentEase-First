@@ -22,18 +22,19 @@ const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empt
   }
 
   return (
-    <div className="w-full mb-3">
+    
+    <div className="  px-4 w-full mb-3  ">
       {/* Main Bar */}
       <div className={`
-        w-full bg-white rounded-lg shadow-sm
+        w-full bg-white rounded-lg shadow-lg
         border border-gray-100
         transition-all duration-200
         ${isExpanded ? 'rounded-b-none border-b-0' : ''}
       `}>
         {/* Main Content Row */}
-        <div className="flex items-center justify-between p-4">
+        <div className=" flex items-center justify-between p-4">
           {/* Left Section */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 ">
             <RoomStatus roomNo={roomNo} isOccupied={isOccupied} />
             <RoomInfo name={name} bill={bill} isOccupied={isOccupied} />
           </div>
@@ -47,6 +48,8 @@ const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empt
             />
             <ExpandButton 
               isExpanded={isExpanded}
+            
+              
               onClick={() => setIsExpanded(!isExpanded)}
             />
           </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/others/Header.jsx'
 import RoomView from './RoomView.jsx'
 import RCard from '../components/others/Room-card/RCard.jsx'
+import AddRoomModal from '../components/TaskList/AddRoomModal.jsx';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 
@@ -15,7 +16,8 @@ const Rooms = ({data}) => {
     
     const {id} = useParams();
     const [property, setProperty] = useState('');
-
+    const [IsModelOpen, setIsModelOpen] = useState(false);
+    
     useEffect(()=>{
         const fetchProperties = async () =>{
             try{
@@ -36,15 +38,22 @@ const Rooms = ({data}) => {
 
         <div className=' py-9'>
 
-            <div className='bg-transparent p-7 flex align-center justify-between mt-3  w-full'>
+            {/* nav */}
+            <div className= 'bg-transparent p-7 flex align-center justify-between mt-3  w-full'>
                 <h1 className='font-bold text-3xl font-sans'>Rooms of {property.name}
                 </h1>
+                <button 
+                    onClick={() => setIsModelOpen(true)}
+                    className="flex items-center bg-blue-700 hover:bg-blue-600 px-6 py-2 rounded-xl text-white transition-colors"
+                >Add new room</button>
             </div>
+
+            
                 <h1 className='font-bold text-3xl font-sans'>
                     {/* {id} */}
                 </h1>
 
-            <div className='flex'>
+            <div className='w-full grid grid-cols-2 '>
                 <RCard 
                     roomNo = "Room 1" 
                     name="Sharad Tiwari" 
@@ -74,34 +83,17 @@ const Rooms = ({data}) => {
                 
             </div>
            
-
+            {IsModelOpen && < AddRoomModal close={()=> setIsModelOpen(false)} />}
             {/* <RoomView /> */}
 
 
         </div>
        
-        <div onClick={handelNavigate}  className='absolute'><i className="fixed fa-solid fa-circle-plus text-8xl bottom-12 right-12 "></i></div>   
-
+         
+        {/* <div onClick={handelNavigate}  className='absolute'><i className="fixed fa-solid fa-circle-plus text-8xl bottom-12 right-12 "></i></div>   */}
     </div>
   )
 }
 
 export default Rooms
 
-// color="bg-green-400"
-// color="bg-purple-400"
-{/* <div className=' bg-[#FC9E6A] px-5 py-4 mt-2 mx-10 rounded-md '> 
-                <div className='flex items-center justify-between '>
-                    <h1 className='font-semibold text-5xl'>Room 101</h1>
-                    <div><i class="fa-solid fa-caret-down text-2xl "></i></div>
-                </div> 
-
-                
-
-                <div className='flex items-center justify-between mx-16 my-4'>
-                    <h1 className='font-mono text-xl bg-[#121212] text-white px-3 rounded-xl'>Name: Suresh Jat</h1>
-                    <h1 className='font-mono text-xl bg-[#121212] text-white px-3 rounded-xl'>Contact no.: 9876543210</h1>
-                    <h1 className='font-mono text-xl bg-[#121212] text-white px-3 rounded-xl'>Status: Family</h1>
-                    <h1 className='font-mono text-xl bg-[#121212] text-white px-3 rounded-xl'>Bill Status: Paid</h1>
-                </div>
-            </div> */}
