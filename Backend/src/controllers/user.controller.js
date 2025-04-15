@@ -22,7 +22,7 @@ const registerUser = (asyncHandler(async(req, res, next) => {
 
     const existedUser = await User.findOne({ $or: [{email}, {username}, {phoneNumber}] });
 
-    console.log(existedUser)
+    // console.log(existedUser)
 
     if(existedUser){
         throw new ApiError(400, "User already exist")
@@ -102,7 +102,7 @@ const loginUser = asyncHandler(async (req, res, next)=>{
 
     const {accessToken, refreshToken} = await generateAccessTokenAndRefreshToken(user._id)
 
-    console.log(refreshToken)
+    // console.log(refreshToken)
 
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 

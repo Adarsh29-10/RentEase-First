@@ -10,7 +10,8 @@ const propertySchema = new Schema(
 
     title: {
       type: String,
-      required: true
+      required: true,
+      index: true
     },
 
     description: {
@@ -18,13 +19,13 @@ const propertySchema = new Schema(
       required: true
     },
 
-    address: {
-      street: { type: String, required: true },
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      pincode: { type: String, required: true },
-      landmark: { type: String },
-    },
+    
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    pincode: { type: String, required: true },
+    landmark: { type: String },
+    
 
     amenities: {
       type: [String],
@@ -69,9 +70,9 @@ const propertySchema = new Schema(
       }
     },
 
-    images: {
+    propertyImages: {
       type: [String], // Cloudinary URLs
-      required: true
+      required: true  
     },
 
     isFullyRented: {
