@@ -41,11 +41,6 @@ const userSchema = new Schema(
             index: true,
         },
     
-        address: {
-            type: String,
-            required: true,
-        },
-    
         aadharCardNumber: {
             type: String,
             required: true,
@@ -56,6 +51,11 @@ const userSchema = new Schema(
             message: (props) => `${props.value} is not a valid Aadhar number!`,
             },
             index: true,
+        },
+
+        address: {
+            type: String,
+            required: true,
         },
     
         password: {

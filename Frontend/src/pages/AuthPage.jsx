@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import LoginForm from '../components/Auth/New/LoginForm';
-import SignupChoice from '../components/Auth/New/SignupChoice';
-import OwnerSignupForm from '../components/Auth/New/OwnerSignupForm';
-import TenantSignupForm from '../components/Auth/New/TenantSignupForm';
-import { Building2 } from 'lucide-react';
+import LoginForm from '../components/Auth/LoginForm';
+// import { Building2 } from 'lucide-react';
+
+import SignUp from '../components/Auth/SIgnUp'
+
 
 function AuthPage() {
   const location = useLocation();
@@ -54,13 +54,7 @@ function AuthPage() {
                 </>
               ) : (
                 <>
-                  {!userType ? (
-                    <SignupChoice setUserType={setUserType} />
-                  ) : userType === 'owner' ? (
-                    <OwnerSignupForm onBack={() => setUserType(null)} />
-                  ) : (
-                    <TenantSignupForm onBack={() => setUserType(null)} />
-                  )}
+                  <SignUp />
                   
                   <p className="text-center mt-4 text-gray-600">
                     Already have an account?{' '}
