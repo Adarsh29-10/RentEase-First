@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BCard from './BCard';
 import AddBuildingCard from '../Card-AddNew/AddBuildingCard';
 import TrialModal from '../../Modals/TrialModal';
-import AddPropertyForm from '../../TaskList/addPropertyForm';
+import PropertyModal from '../../Modals/PropertModal/PropertyModal.jsx'
 
 const BuildingCardDiv = ({ data, onAddRoom, onAssignTenant }) => {
   const [isModelOpen, setIsModelOpen] = useState(false);
@@ -47,7 +47,7 @@ const BuildingCardDiv = ({ data, onAddRoom, onAssignTenant }) => {
       </div>
 
       {/* Modal */}
-      {isModelOpen && <AddPropertyForm Close={() => setIsModelOpen(false)} />}
+      {isModelOpen && <PropertyModal Close={() => setIsModelOpen(false)} />}
     </div>
   );
 };
