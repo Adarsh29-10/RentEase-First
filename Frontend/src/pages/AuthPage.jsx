@@ -18,6 +18,10 @@ function AuthPage() {
     }
   }, [location]);
 
+  const handleSignupSuccess = () => {
+    setIsLoginView(true); 
+  };
+
   return (
     //full screen div
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
@@ -54,7 +58,7 @@ function AuthPage() {
                 </>
               ) : (
                 <>
-                  <SignUp />
+                 <SignUp onSuccess={handleSignupSuccess} />
                   
                   <p className="text-center mt-4 text-gray-600">
                     Already have an account?{' '}

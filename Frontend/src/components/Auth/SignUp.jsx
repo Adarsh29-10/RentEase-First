@@ -7,7 +7,7 @@ import Step5 from "./Step5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = ({onSuccess}) => {
     const [currentStep, setCurrentStep] = useState(1);
     const [formData, setFormData] = useState({
       role: "",
@@ -37,17 +37,17 @@ const SignUp = () => {
       prevStep();
     };
   
-    const navigate = useNavigate();
 
     const handleSubmit = (finalData) => {
       console.log("Final Form Data:", finalData);
   
       // Perform the final submission using axios
-      axios.post("http://localhost:8000/api/v1/users/register", finalData)
+      axios.post("http://localhost:8080/api/v1/users/register", finalData)
         .then((response) => {
           console.log("Success:", response.data);
           alert("Signup successful!");
-          navigate('/');
+          onSuccess()
+
         })
         .catch((error) => {
           console.error("Error:", error);

@@ -15,35 +15,34 @@ const LoginForm = () => {
     setError('');
 
     try {
-      // 1. Send login request to backend
+      
       const response = await axios.post(
-        '/api/login', // Updated endpoint
-        {
-          ownerEmail: formData.email, // Match your backend expected field names
-          ownerPassword: formData.password
-        },
-        {
-          withCredentials: true, // For cookies/sessions if needed
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
+        'http://localhost:8080/api/v1/users/login',
+        formData,
+        { withCredentials: true } 
       );
 
-      // 2. Handle successful login
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token); // Store token
-        localStorage.setItem('owner', JSON.stringify(response.data.owner)); // Store owner data
-        navigate('/OwnerDashboard'); // Redirect to dashboard
-      }
+      if (response.data.success) {
+        const role = response.data.data.user.role; 
 
-    } catch (error) {
-      console.error('Login error:', error);
-      setError(error.response?.data?.message || 'Login failed. Please try again.');
-    }
-  };
+        // Navigate to the appropriate dashboard based on the role
+        if (role === 'owner') {
+          navigate('/OwnerDashboard');
+        } else if (role === 'tenant') {
+          navigate('/TenantDashboard');
+        } else {
+          setError('Invalid role. Please contact support.');
+        }
+      } else {
+        setError(response.data.message || 'Login failed. Please try again.');
+      }
+      } catch (err) {
+        setError(err.response?.data?.message || 'An error occurred. Please try again.');
+      }
+  }
 
   return (
+    
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900">Welcome Back!</h2>
@@ -87,7 +86,7 @@ const LoginForm = () => {
         </button>
       </form>
     </div>
-  );
+  )
 };
 
 export default LoginForm;
