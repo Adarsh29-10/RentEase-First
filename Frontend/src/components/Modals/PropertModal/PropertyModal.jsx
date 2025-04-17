@@ -3,12 +3,16 @@ import React, { useState } from 'react';
 // import axios from 'axios';
 import PropModalStep1 from './PropModalStep1';
 import PropModalStep2 from './PropModalStep2';
+import PropModalStep3 from './PropModalStep3';
+import PropModalStep4 from './PropModalStep4';
+import PropModalStep5 from './PropModalStep5';
+import PropModalStep6 from './PropModalStep6';
 
  const PropertyModal = ({ Close }) => {
 
     const [currentStep, setCurrentStep] = useState(1); // Current step logic can be used in future steps
     const [formData, setFormData] = useState({
-        title: "",
+        title: "Property 1",
         description: "",
         street: "",
         city: "",
@@ -102,6 +106,14 @@ import PropModalStep2 from './PropModalStep2';
             {currentStep === 1 && <PropModalStep1 formData={formData} setFormData={setFormData} onNext={handleNext}/>}
           
             {currentStep === 2 && <PropModalStep2 formData={formData} setFormData={setFormData} onBack={handleBack} onNext={handleNext}/>}
+
+            {currentStep === 3 && <PropModalStep3 formData={formData} setFormData={setFormData} onBack={handleBack} onNext={handleNext}/>}
+
+            {currentStep === 4 && <PropModalStep4 formData={formData} setFormData={setFormData} onBack={handleBack} onNext={handleNext}/>}
+           
+            {currentStep === 5 && <PropModalStep5 formData={formData} setFormData={setFormData} onBack={handleBack} onNext={handleNext}/>}
+            
+            {currentStep === 6 && <PropModalStep6 formData={formData} setFormData={setFormData} onBack={handleBack} onSubmit={handleSubmit}/>}
         </div>
       </div>
     </div>
