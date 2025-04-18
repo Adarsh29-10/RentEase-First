@@ -12,7 +12,7 @@ import PropModalStep6 from './PropModalStep6';
 
     const [currentStep, setCurrentStep] = useState(1); // Current step logic can be used in future steps
     const [formData, setFormData] = useState({
-        title: "Property 1",
+        title: "",
         description: "",
         street: "",
         city: "",

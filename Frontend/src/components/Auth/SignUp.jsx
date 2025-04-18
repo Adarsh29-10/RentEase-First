@@ -6,6 +6,7 @@ import Step4 from "./Step4";
 import Step5 from "./Step5";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../Utils/AxiosHelper.js";
 
 const SignUp = ({onSuccess}) => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -40,7 +41,10 @@ const SignUp = ({onSuccess}) => {
 
     const handleSubmit = (finalData) => {
       console.log("Final Form Data:", finalData);
-  
+      
+      // api.post(/users/register, finalData)
+
+
       // Perform the final submission using axios
       axios.post("http://localhost:8080/api/v1/users/register", finalData)
         .then((response) => {
