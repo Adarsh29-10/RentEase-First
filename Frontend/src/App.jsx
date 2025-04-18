@@ -8,6 +8,8 @@ import Tenant from './components/Dashboard/Tenant';
 
 import AuthPage from './pages/AuthPage';
 import Profile from './pages/Profile';
+import Settings from './pages/Settings';
+import OwnerDashboard from './components/Dashboard/new/OwnerDashboard';
 
 
 
@@ -20,9 +22,16 @@ const App = () => {
       <Route path='/' element={<AuthPage />} />
 
       <Route 
+        path='/Owner' 
+        element={
+          <OwnerDashboard />
+        } 
+        
+      />
+      <Route 
         path='/OwnerDashboard' 
         element={
-          <Owner/>
+          <Owner />
         } 
         
       />
@@ -36,6 +45,7 @@ const App = () => {
       />
 
       <Route path='/profile' element={<Profile/>} />
+      <Route path='/settings' element={<Settings />} />
       
     </Routes>
   );
