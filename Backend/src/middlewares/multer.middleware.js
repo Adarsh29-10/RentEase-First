@@ -10,6 +10,7 @@ if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
 }
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, dir); // Use the resolved absolute path

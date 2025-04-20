@@ -16,11 +16,11 @@ const Profile = () => {
     
     // Sample user data
     const sampleUser = {
-        fullName: 'John Doe',
-        email: 'john.doe@example.com',
+        fullName: 'Adarsh Raghuvanshi',
+        email: 'aadi29@gmail.com',
         phoneNumber: '+91 9876543210',
         aadharCardNumber: '1234 5678 9012',
-        address: '123, Main Street, City, State - 123456',
+        address: '123, Main Road, Ghatabillod, Dhar, MP - 454773',
         role: 'owner'
     };
 
@@ -58,8 +58,8 @@ const Profile = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            <div className="max-w-4xl mx-auto py-8 px-4">
+        <div className="min-h-screen bg-gray-50 ">
+            <div className="max-w-full mx-auto py-8 px-4">
                 {/* Profile Header */}
                 <div className="bg-white rounded-lg shadow-md p-6 mb-6">
                     <div className="flex items-center justify-between mb-6">

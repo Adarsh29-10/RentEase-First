@@ -1,15 +1,20 @@
 // import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 // import axios from 'axios';
-import Owner from './components/Dashboard/Owner';
+import OwnerDashboard from './components/Dashboard/OwnerDashboard';
 
 import Rooms from './pages/Rooms';
 import Tenant from './components/Dashboard/Tenant';
 
 import AuthPage from './pages/AuthPage';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
-import OwnerDashboard from './components/Dashboard/new/OwnerDashboard';
+import Profile from './pages/Sidebar/Profile';
+import Settings from './pages/Sidebar/Settings';
+import Statistics from './pages/Sidebar/Statistics';
+import OwnerLayout from './Layouts/OwnerLayout';
+import Billings from './pages/Sidebar/Billings';
+import Help from './pages/Sidebar/Help';
+import ViewProperty from './pages/ViewProperty';
+import MainLayout from './Layouts/MainLayout';
 
 
 
@@ -19,34 +24,25 @@ const App = () => {
   return (
     
     <Routes>
-      <Route path='/' element={<AuthPage />} />
-
-      <Route 
-        path='/Owner' 
-        element={
-          <OwnerDashboard />
-        } 
-        
-      />
-      <Route 
-        path='/OwnerDashboard' 
-        element={
-          <Owner />
-        } 
-        
-      />
-
+        <Route path='/auth' element={<AuthPage />} />
       <Route path='/TenantDashboard' element={<Tenant/>} />
-     
 
-      <Route 
-        path='/manage-rooms/:id' 
-        element={<Rooms />} 
-      />
+      <Route path='/' element={<MainLayout />}>
+        <Route path='/OwnerDashboard' element={< OwnerLayout />}>
+          <Route index element={< OwnerDashboard />} />
+          <Route path='Statistics' element={<Statistics />} />
+          <Route path='Billings' element={<Billings />} />
+          <Route path='Settings' element={<Settings />} />
+          <Route path='Help' element={<Help />} />
+          <Route path='profile' element={<Profile/>} />
 
-      <Route path='/profile' element={<Profile/>} />
-      <Route path='/settings' element={<Settings />} />
+          <Route path='property-details/:id' element={<ViewProperty />} />
+          <Route path='manage-rooms/:id' element={<Rooms />} />
+        </Route>
+      </Route>
+       
       
+
     </Routes>
   );
 };

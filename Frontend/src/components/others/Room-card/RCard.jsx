@@ -5,7 +5,7 @@ import ActionButtons from './ActionButtons'
 import ExpandButton from './ExpandButton'
 import ExpandedDetails from './ExpandedDetails'
 
-const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empty}) => {
+const RCard = ({ roomNo, name, contact, tStatus, bill, empty}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const isOccupied = name && contact;
   
@@ -23,13 +23,11 @@ const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empt
 
   return (
     
-    <div className="  px-4 w-full mb-3  ">
+    <div className="px-4 w-full mb-8  ">
       {/* Main Bar */}
-      <div className={`
-        w-full bg-white rounded-lg shadow-lg
-        border border-gray-100
-        transition-all duration-200
-        ${isExpanded ? 'rounded-b-none border-b-0' : ''}
+      <div className={`w-full bg-white rounded-sm shadow-md 
+        
+        transition-all duration-75 ${isExpanded ? 'rounded-b-none border-b-2' : ''}
       `}>
         {/* Main Content Row */}
         <div className=" flex items-center justify-between p-4">
@@ -48,8 +46,6 @@ const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empt
             />
             <ExpandButton 
               isExpanded={isExpanded}
-            
-              
               onClick={() => setIsExpanded(!isExpanded)}
             />
           </div>
@@ -57,7 +53,7 @@ const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empt
       </div>
 
       {/* Expandable Details Section */}
-      {isExpanded && (
+      {/* {isExpanded && (
         <ExpandedDetails
           contact={contact}
           tStatus={tStatus}
@@ -66,6 +62,11 @@ const RCard = ({color = 'bg-[#ffff]', roomNo, name, contact, tStatus, bill, empt
           onAssign={handleAssign}
           onRemove={handleRemove}
         />
+      )} */}
+      {isExpanded && (
+        <div className='bg-gray-50 h-48 p-10'>
+          <h1 className='text-center'>Coming soon </h1>
+        </div>
       )}
     </div>
   )

@@ -33,27 +33,27 @@ const Rooms = ({data}) => {
     }, [id]);
 
   return (
-    <div className='relative h-screen w-full overflow-x-hidden '>
-        <Header />
+    <div className='h-screen overflow-x-hidden max-w-full mx-auto py-8 px-4 '>
+        {/* <Header /> */}
+        <div className= 'bg-transparent mb-8 flex align-center justify-between w-full'>
+            <h1 className='font-bold text-3xl font-sans'>Rooms Dashboard {property.name}
+            </h1>
+            <button 
+                onClick={() => setIsModelOpen(true)}
+                className="flex items-center bg-blue-700 hover:bg-blue-600 px-6 py-2 rounded-xl text-white transition-colors"
+            >Add new room</button>
+        </div>
 
-        <div className=' py-9'>
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
 
             {/* nav */}
-            <div className= 'bg-transparent p-7 flex align-center justify-between mt-3  w-full'>
-                <h1 className='font-bold text-3xl font-sans'>Rooms of {property.name}
-                </h1>
-                <button 
-                    onClick={() => setIsModelOpen(true)}
-                    className="flex items-center bg-blue-700 hover:bg-blue-600 px-6 py-2 rounded-xl text-white transition-colors"
-                >Add new room</button>
-            </div>
+           
 
             
                 <h1 className='font-bold text-3xl font-sans'>
                     {/* {id} */}
                 </h1>
 
-            <div className='w-full grid grid-cols-2 '>
                 <RCard 
                     roomNo = "Room 1" 
                     name="Sharad Tiwari" 
@@ -80,8 +80,6 @@ const Rooms = ({data}) => {
                     empty="Empty"
 
                 />
-                
-            </div>
            
             {IsModelOpen && < AddRoomModal close={()=> setIsModelOpen(false)} />}
             {/* <RoomView /> */}

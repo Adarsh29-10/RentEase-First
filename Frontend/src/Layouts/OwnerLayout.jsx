@@ -1,64 +1,55 @@
+import { Outlet, useLocation } from 'react-router-dom';
 import React, { useState } from 'react'
-import Header from '../others/Header.jsx'
-import BuildingCardDiv from '../others/Property-cards/BuildingCardDiv.jsx'
-import { Sidebar, SidebarItem } from '../Nav/Sidebar.jsx'
+import {Sidebar , SidebarItem} from '../components/Nav/Sidebar'
 import { BarChart2, BarChart3, LayoutDashboard, LifeBuoy, Receipt, ReceiptIndianRupee, Settings, Settings2 } from 'lucide-react'
-const Owner = ({data}) => {
 
-  const [isSideNavOpen, setIsSideNavOpen] = useState(false)
-  return (
-    <>
-      {/* <Header/> */}
-      <div className=' h-screen flex '>
-       
-
-          <Sidebar>
+const OwnerLayout = () => {
+    const [isSideNavOpen, setIsSideNavOpen] = useState(false)
+    
+    return (
+        <div className=' h-screen flex  '>
+            
+          <Sidebar to = "/OwnerDashboard/Profile">
             <SidebarItem 
               icon={ <LayoutDashboard size={20} /> }
               text={"Dashboard"}  
-              active
-              
+              to = "/OwnerDashboard"
             />
 
             <SidebarItem 
               icon={ <BarChart3 size={20} /> }
               text={"Statistics"}  
-              
+              to = "/OwnerDashboard/Statistics"
             />
 
             <SidebarItem 
               icon={ <ReceiptIndianRupee size={20} /> }
               text={"Billings"}  
               alert
+              to = "/OwnerDashboard/Billings"
             />
 
             <SidebarItem 
               icon={ <Settings size={20} /> }
               text={"Settings"}  
               alert
-              
+              to = "/OwnerDashboard/Settings"
             />
 
             <SidebarItem 
-              icon={ <LifeBuoy size={20} /> }
-              text={"Help"}  
-                
+                icon={ <LifeBuoy size={20} /> }
+                text={"Help"}  
+                to = "/OwnerDashboard/Help"
             />
 
           </Sidebar>
           
+          <div className='flex-1 overflow-y-auto mt-12'>
+            <Outlet />
+          </div>
         
-        <div className='flex-1 overflow-y-auto'>
-          <BuildingCardDiv data={data} />
-
         </div>
-      </div>
-        
-      
-    </>
-  )
-}
+    );
+};
 
-export default Owner
-
-
+export default OwnerLayout;

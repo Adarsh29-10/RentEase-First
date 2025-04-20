@@ -45,16 +45,19 @@ const propertySchema = new Schema(
       }
     },
 
-    propertyType: {
-      type: String,
-      required: true  // e.g., 1BHK, Villa, etc.
-    },
-
+    
     rentType: {
       type: String,
       enum: ["entire", "roomwise"],
       required: true,
     },
+    
+    propertyType: {
+      type: String,
+        // e.g., 1BHK, Villa, etc.
+    },
+    totalBHK: Number,       // show only if rentType = "entire"
+    totalRooms: Number,     // show only if rentType = "roomwise"
 
     rentAmount: {
       type: Number,

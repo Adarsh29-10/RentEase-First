@@ -1,13 +1,16 @@
+import { ContactIcon } from "lucide-react"
+import React from "react"
+
 const ExpandedDetails = ({ contact, tStatus, isOccupied, onEdit, onAssign, onRemove }) => (
   <div className="w-full bg-gray-50 rounded-b-lg border border-t-0 border-gray-100 p-4">
     <div className="flex flex-col space-y-4">
       {/* Contact Info */}
       <div className="space-y-3">
         {contact && (
-          <ContactInfo icon="phone" text={contact} />
+          <ContactInfo  text={contact} />
         )}
         {tStatus && (
-          <ContactInfo icon="calendar" text={tStatus} />
+          <ContactInfo  text={tStatus} />
         )}
       </div>
 
@@ -45,24 +48,24 @@ const ContactInfo = ({ icon, text }) => (
   </div>
 )
 
-const ActionButton = ({ variant, onClick, label }) => {
-  const colors = {
-    danger: 'text-red-600 hover:bg-red-50',
-    primary: 'text-blue-600 hover:bg-blue-50',
-    success: 'text-green-600 hover:bg-green-50'
-  }
+// const ActionButton = ({ variant, onClick, label }) => {
+//   const colors = {
+//     danger: 'text-red-600 hover:bg-red-50',
+//     primary: 'text-blue-600 hover:bg-blue-50',
+//     success: 'text-green-600 hover:bg-green-50'
+//   }
 
-  return (
-    <button
-      className={`px-4 py-2 text-sm font-medium ${colors[variant]} rounded-lg transition-colors`}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
-    >
-      {label}
-    </button>
-  )
-}
+// //   return (
+// //     <button
+// //       className={`px-4 py-2 text-sm font-medium ${colors[variant]} rounded-lg transition-colors`}
+// //       onClick={(e) => {
+// //         e.stopPropagation();
+// //         onClick();
+// //       }}
+// //     >
+// //       {label}
+// //     </button>
+// //   )
+// }
 
 export default ExpandedDetails 

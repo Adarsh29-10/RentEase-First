@@ -17,7 +17,7 @@ const LoginForm = () => {
     try {
       
       const response = await axios.post(
-        'http://localhost:8080/api/v1/users/login',
+        'http://localhost:8000/api/v1/users/login',
         formData,
         { withCredentials: true } 
       );
@@ -27,7 +27,7 @@ const LoginForm = () => {
 
         // Navigate to the appropriate dashboard based on the role
         if (role === 'owner') {
-          navigate('/OwnerDashboard');
+          navigate('/Owner');
         } else if (role === 'tenant') {
           navigate('/TenantDashboard');
         } else {

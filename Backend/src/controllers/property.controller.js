@@ -25,8 +25,8 @@ const addNewProperty = asyncHandler(async (req, res) => {
   if (
     [
       title, description, street, city, state,
-      pincode, landmark, amenities, isFurnitured,
-      propertyType, rentType, rentAmount
+      pincode, amenities, 
+      propertyType, rentType, 
     ].some(field => typeof field === "string" && field.trim() === "")
   ) {
     throw new ApiError(401, "All fields are required");
@@ -91,6 +91,7 @@ const addNewProperty = asyncHandler(async (req, res) => {
 });
 
 const getProperties = asyncHandler(async (req, res, next) => {
+  // console.log("Entered")
   const properties = await Property.find({ owner: req.user._id });
 
   if (!properties || properties.length === 0) {
