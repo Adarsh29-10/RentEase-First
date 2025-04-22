@@ -19,13 +19,13 @@ const PropertyModal = ({ Close }) => {
     pincode: "",
     landmark: "",
     amenities: "",
-    isFurnitured: "",   // only in entire
+    // isFurnitured: "",   // only in entire
     propertyType: "",   // e.g., 1BHK, Villa, etc.
-    rentType: "",       // entire, roomwise
-    rentAmount: "",     // only in entire
+    // rentType: "",       // entire, roomwise
+    // rentAmount: "",     // only in entire
     propertyImages: [],
-    totalBHK: "",
-    totalRooms: "",
+    // totalBHK: "",
+    // totalRooms: "",
   });
 
   const rentType = formData.rentType;
@@ -47,24 +47,24 @@ const PropertyModal = ({ Close }) => {
     prevStep();
   };
 
-  const handleRentTypeChange = (newRentType) => {
-    setFormData((prev) => ({
-      ...prev,
-      rentType: newRentType,
-      ...(newRentType === "entire"
-        ? {
-            // Clear roomwise-related fields
-            totalRooms: "",
-          }
-        : {
-            // Clear entire-related fields
-            isFurnitured: "",
-            propertyType: "",
-            rentAmount: "",
-            totalBHK: "",
-          }),
-    }));
-  };
+  // const handleRentTypeChange = (newRentType) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     rentType: newRentType,
+  //     ...(newRentType === "entire"
+  //       ? {
+  //           // Clear roomwise-related fields
+  //           totalRooms: "",
+  //         }
+  //       : {
+  //           // Clear entire-related fields
+  //           isFurnitured: "",
+  //           propertyType: "",
+  //           rentAmount: "",
+  //           totalBHK: "",
+  //         }),
+  //   }));
+  // };
 
   const handleSubmit = async (finalData) => {
     setIsSubmitting(true);
@@ -147,7 +147,7 @@ const PropertyModal = ({ Close }) => {
             />
           )}
 
-          {currentStep === 3 && (
+          {/* {currentStep === 3 && (
             <PropModalStep3
               formData={formData}
               setFormData={setFormData}
@@ -155,9 +155,9 @@ const PropertyModal = ({ Close }) => {
               onNext={handleNext}
               onRentTypeChange={handleRentTypeChange}
             />
-          )}
+          )} */}
 
-          {currentStep === 4 && rentType === 'entire' && (
+          {currentStep === 3 && (
             <PropModalStep4
               formData={formData}
               setFormData={setFormData}
@@ -166,16 +166,16 @@ const PropertyModal = ({ Close }) => {
             />
           )}
 
-          {currentStep === 4 && rentType === 'roomwise' && (
+          {/* {currentStep === 4 && rentType === 'roomwise' && (
             <PropModalStep5
               formData={formData}
               setFormData={setFormData}
               onBack={handleBack}
               onNext={handleNext}
             />
-          )}
+          )} */}
 
-          {currentStep === 5 && (
+          {currentStep === 4 && (
             <PropModalStep6
               formData={formData}
               setFormData={setFormData}

@@ -1,3 +1,4 @@
+import { CornerDownRight } from 'lucide-react';
 import React, { useState, useRef, useEffect } from 'react';
 
 const PropModalStep6 = ({ formData, setFormData, onBack, onSubmit, isSubmitting }) => {
@@ -117,7 +118,12 @@ const PropModalStep6 = ({ formData, setFormData, onBack, onSubmit, isSubmitting 
   
   return (
     <div>
+      
       <div className="mb-4">
+      <div className='flex items-center gap-1 bg-blue-100 mb-7 -mt-3'>
+        <CornerDownRight />
+        <h1 className='font-semibold'>Final Step : Property Images</h1>
+      </div>
         <label className="text-sm font-medium text-gray-700 mb-2 block">Property Images</label>
         
         <div
@@ -136,6 +142,7 @@ const PropModalStep6 = ({ formData, setFormData, onBack, onSubmit, isSubmitting 
             accept="image/jpeg, image/png, image/webp"
             multiple
             onChange={handleFileInput}
+            
           />
           
           <div className="flex flex-col items-center justify-center space-y-2">

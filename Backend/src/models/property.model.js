@@ -32,46 +32,46 @@ const propertySchema = new Schema(
       required: true
     },
 
-    isFurnitured: {
-      type: Boolean,
-      validate: {
-        validator: function (value) {
-          if (this.rentType === 'entire') {
-            return typeof value === 'boolean';
-          }
-          return true; // Not required for roomwise
-        },
-        message: "isFurnitured must be specified if rentType is 'entire'"
-      }
-    },
+    // isFurnitured: {
+    //   type: Boolean,
+    //   validate: {
+    //     validator: function (value) {
+    //       if (this.rentType === 'entire') {
+    //         return typeof value === 'boolean';
+    //       }
+    //       return true; // Not required for roomwise
+    //     },
+    //     message: "isFurnitured must be specified if rentType is 'entire'"
+    //   }
+    // },
 
     
-    rentType: {
-      type: String,
-      enum: ["entire", "roomwise"],
-      required: true,
-    },
+    // rentType: {
+    //   type: String,
+    //   enum: ["entire", "roomwise"],
+    //   required: true,
+    // },
     
     propertyType: {
       type: String,
         // e.g., 1BHK, Villa, etc.
     },
-    totalBHK: Number,       // show only if rentType = "entire"
-    totalRooms: Number,     // show only if rentType = "roomwise"
+    // totalBHK: String,       // show only if rentType = "entire"
+    // totalRooms: Number,     // show only if rentType = "roomwise"
 
-    rentAmount: {
-      type: Number,
-      min: 0,
-      validate: {
-        validator: function (value) {
-          if (this.rentType === 'entire') {
-            return value != null && value > 0;
-          }
-          return true; // optional for roomwise
-        },
-        message: "Rent amount is required when rentType is 'entire'"
-      }
-    },
+    // rentAmount: {
+    //   type: Number,
+    //   min: 0,
+    //   validate: {
+    //     validator: function (value) {
+    //       if (this.rentType === 'entire') {
+    //         return value != null && value > 0;
+    //       }
+    //       return true; // optional for roomwise
+    //     },
+    //     message: "Rent amount is required when rentType is 'entire'"
+    //   }
+    // },
 
     propertyImages: {
       type: [String], // Cloudinary URLs

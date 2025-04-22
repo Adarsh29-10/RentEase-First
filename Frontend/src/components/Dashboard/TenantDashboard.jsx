@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Tenant = () => {
+const TenantDashboard = () => {
   return (
     <div>Tenant</div>
   )
 }
 
-export default Tenant
+export default TenantDashboard

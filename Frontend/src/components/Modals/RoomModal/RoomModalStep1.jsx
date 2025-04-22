@@ -1,18 +1,18 @@
 import { CornerDownRight } from 'lucide-react';
 import React, { useState } from 'react';
 
-const PropModalStep1 = ({ formData, setFormData, onNext }) => {
-    const [title, setTitle] = useState(formData.title || "");
+const RoomModalStep1 = ({ formData, setFormData, onNext }) => {
+    const [roomNumber, setRoomNumber] = useState(formData.roomNumber || "");
     
-    const [amenities, setAmenities] = useState(formData.amenities || "");
+    const [roomType, setRoomType] = useState(formData.roomType || "");
 
     const handleNext = () => {
-        if (!title.trim() || !amenities.trim()) {
+        if (!roomNumber.trim() || !roomType.trim()) {
             alert("All fields are required.");
             return;
         }
         
-        const updatedData = { title,  amenities };
+        const updatedData = { roomNumber,  roomType };
         setFormData({ ...formData, ...updatedData });
         onNext(updatedData);
     };
@@ -26,23 +26,23 @@ const PropModalStep1 = ({ formData, setFormData, onNext }) => {
             
             <div className="space-y-4">
                 <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Property Name</label>
+                    <label className="text-sm font-medium text-gray-700 mb-1">Room Number</label>
                     <input
                         className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Enter Name or Title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Enter Room Number"
+                        value={roomNumber}
+                        onChange={(e) => setRoomNumber(e.target.value)}
                     />
                 </div>
                 
                 
                 <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Amenities</label>
+                    <label className="text-sm font-medium text-gray-700 mb-1">Room Type</label>
                     <input
                         className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="e.g., wifi, gym, etc. "
-                        value={amenities}
-                        onChange={(e) => setAmenities(e.target.value)}
+                        placeholder="e.g., 1bhk, 2bhk, maybe "
+                        value={roomType}
+                        onChange={(e) => setRoomType(e.target.value)}
                     />
                 </div>
             </div>
@@ -60,4 +60,4 @@ const PropModalStep1 = ({ formData, setFormData, onNext }) => {
     );
 };
 
-export default PropModalStep1;
+export default RoomModalStep1;

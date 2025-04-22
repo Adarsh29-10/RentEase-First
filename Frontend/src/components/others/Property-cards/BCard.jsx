@@ -22,6 +22,12 @@ const BCard = ({
 }) => {
   const navigate = useNavigate();
 
+  const amenitiesArray = Array.isArray(amenities)
+    ? (typeof amenities[0] === "string" && amenities[0].includes(",")
+        ? amenities[0].split(',').map(a => a.trim())
+        : amenities)
+    : [];
+
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col border border-gray-100 h-full cursor-pointer">
 
@@ -68,33 +74,33 @@ const BCard = ({
                 {propertyType || 'N/A'}
               </span>
             </div>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <DollarSign className="h-4 w-4 text-gray-500 mr-2" />
               <span className="text-sm text-gray-600">
                 {rentAmount ? `₹${rentAmount}/mo` : 'N/A'}
               </span>
-            </div>
-            <div className="flex items-center">
+            </div> */}
+            {/* <div className="flex items-center">
               <Box className="h-4 w-4 text-gray-500 mr-2" />
               <span className="text-sm text-gray-600">
                 {isFurnitured ? 'Furnished' : 'Unfurnished'}
               </span>
-            </div>
-            <div className="flex items-center">
+            </div> */}
+            {/* <div className="flex items-center">
               <Users className="h-4 w-4 text-gray-500 mr-2" />
               <span className="text-sm text-gray-600 capitalize">
                 {rentType?.toLowerCase() || 'N/A'}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Amenities */}
-        {amenities?.length > 0 && (
+        {amenitiesArray.length > 0 && (
           <div className="mb-4">
             <h4 className="text-sm font-medium text-gray-700 mb-2">Amenities</h4>
             <div className="flex flex-wrap gap-2 max-h-20 overflow-y-auto py-1">
-              {amenities.map((amenity, index) => (
+              {amenitiesArray.map((amenity, index) => (
                 <span
                   key={index}
                   className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded-full whitespace-nowrap"
@@ -106,6 +112,7 @@ const BCard = ({
             </div>
           </div>
         )}
+
 
         {/* Status and Actions */}
         <div className="mt-auto pt-3 border-t border-gray-100 flex justify-between items-center">

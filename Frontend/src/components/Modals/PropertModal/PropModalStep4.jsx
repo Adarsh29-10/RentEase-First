@@ -31,20 +31,23 @@ const propertyTypes = [
     name: "Penthouse",
     description: "Luxurious top-floor apartment (when renting entire unit).",
     color: "bg-red-100 hover:bg-red-200 text-red-800"
-  }
+  },
+  {
+    name: "Others",
+    description: "Any other type, add about this in description field in step 3",
+    color: "bg-orange-100 hover:bg-red-200 text-red-800"
+  },
 ];
 
 const PropModalStep4 = ({ formData, setFormData, onBack, onNext }) => {
   const [propertyType, setPropertyType] = useState(formData.propertyType || "");
-  const [totalBHK, setTotalBHK] = useState(formData.totalBHK || "");
-  const [isFurnitured, setIsFurnitured] = useState(formData.isFurnitured || false);
-  const [rentAmount, setRentAmount] = useState(formData.rentAmount || "");
+  const [description, setDescription] = useState(formData.description || "");
   const [showTooltip, setShowTooltip] = useState(null);
 
   const handleNext = () => {
-    if (propertyType.trim() && totalBHK && rentAmount.trim() && isFurnitured !== "") {
-      setFormData({ ...formData, propertyType, totalBHK, isFurnitured, rentAmount });
-      onNext({ ...formData, propertyType, totalBHK, isFurnitured, rentAmount });
+    if (propertyType.trim() && description.trim()) {
+      setFormData({ ...formData, propertyType, description});
+      onNext({ ...formData, propertyType, description });
     } else {
       alert("Please fill all required fields.");
     }
@@ -54,13 +57,13 @@ const PropModalStep4 = ({ formData, setFormData, onBack, onNext }) => {
     <div>
       <div className='flex items-center gap-1 bg-blue-100 mb-7 -mt-3'>
         <CornerDownRight />
-        <h1 className='font-semibold'>Step 4: Property Details</h1>
+        <h1 className='font-semibold'>Step 3: Property Details</h1>
       </div>
 
       {/* Property Type Selection */}
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-3">
-          <label className="text-sm font-medium text-gray-700">Property Type*</label>
+          <label className="text-sm font-medium text-gray-700">Property Type</label>
           <div 
             className="relative"
             onMouseEnter={() => setShowTooltip('types')}
@@ -96,13 +99,28 @@ const PropModalStep4 = ({ formData, setFormData, onBack, onNext }) => {
             </button>
           ))}
         </div>
-        {propertyType && (
-          <p className="mt-2 text-sm text-gray-600">Selected: {propertyType}</p>
+        {propertyType !== 'Others' && (
+          <p className="mt-2 text-sm text-gray-600">Selected: {propertyType}, add size and other details in "Property Description" field below</p>
+        )}
+        
+        {propertyType === 'Others'  && (
+          <p className="mt-2 text-sm text-gray-600">Selected: {propertyType}, Add each and every details like size and others below in "Property Description" field below </p>
         )}
       </div>
+        
+      <div className="flex flex-col">
+          <label className="text-sm font-medium text-gray-700 mb-1">Property Description</label>
+          <input
+              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Add extra details for property type that you selected"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+          />
+      </div>
+                
 
       {/* BHK Input */}
-      <div className="flex flex-col mb-6">
+      {/* <div className="flex flex-col mb-6">
         <label className="text-sm font-medium text-gray-700 mb-1">Total BHK*</label>
         <input
           className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -112,10 +130,10 @@ const PropModalStep4 = ({ formData, setFormData, onBack, onNext }) => {
           type="number"
           min="1"
         />
-      </div>
+      </div> */}
 
       {/* Furniture Status */}
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <label className="text-sm font-medium text-gray-700 mb-3 block">Furniture Status*</label>
         <div className="flex gap-4">
           <button
@@ -141,10 +159,10 @@ const PropModalStep4 = ({ formData, setFormData, onBack, onNext }) => {
             Unfurnished
           </button>
         </div>
-      </div>
+      </div> */}
 
       {/* Rent Amount */}
-      <div className="flex flex-col mb-6">
+      {/* <div className="flex flex-col mb-6">
         <label className="text-sm font-medium text-gray-700 mb-1">Rent Amount / month (₹)*</label>
         <input
           className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -154,7 +172,7 @@ const PropModalStep4 = ({ formData, setFormData, onBack, onNext }) => {
           type="number"
           min="1"
         />
-      </div>
+      </div> */}
 
       {/* Navigation Buttons */}
       <div className="flex justify-between mt-8">

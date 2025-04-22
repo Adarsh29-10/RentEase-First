@@ -1,10 +1,10 @@
 // import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 // import axios from 'axios';
 import OwnerDashboard from './components/Dashboard/OwnerDashboard';
 
 import Rooms from './pages/Rooms';
-import Tenant from './components/Dashboard/Tenant';
+import TenantDashboard from './components/Dashboard/TenantDashboard';
 
 import AuthPage from './pages/AuthPage';
 import Profile from './pages/Sidebar/Profile';
@@ -15,6 +15,7 @@ import Billings from './pages/Sidebar/Billings';
 import Help from './pages/Sidebar/Help';
 import ViewProperty from './pages/ViewProperty';
 import MainLayout from './Layouts/MainLayout';
+import RoomView from './pages/RoomView';
 
 
 
@@ -24,10 +25,12 @@ const App = () => {
   return (
     
     <Routes>
-        <Route path='/auth' element={<AuthPage />} />
-      <Route path='/TenantDashboard' element={<Tenant/>} />
+      <Route path='/' element={<Navigate to = "/auth" />} />
+      <Route path='/auth' element={<AuthPage />} />
 
-      <Route path='/' element={<MainLayout />}>
+      <Route path='/TenantDashboard' element={<TenantDashboard/>} />
+
+      <Route element={<MainLayout />}>
         <Route path='/OwnerDashboard' element={< OwnerLayout />}>
           <Route index element={< OwnerDashboard />} />
           <Route path='Statistics' element={<Statistics />} />
@@ -38,6 +41,7 @@ const App = () => {
 
           <Route path='property-details/:id' element={<ViewProperty />} />
           <Route path='manage-rooms/:id' element={<Rooms />} />
+          <Route path='viewroom' element={<RoomView />} />
         </Route>
       </Route>
        

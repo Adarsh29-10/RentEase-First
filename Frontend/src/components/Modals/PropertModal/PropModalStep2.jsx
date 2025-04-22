@@ -55,6 +55,7 @@ const PropModalStep2 = ({ formData, setFormData, onBack,  onNext }) => {
                 <div className="flex flex-col mb-4">
                     <label className="text-sm font-medium text-gray-700 mb-1">Pincode</label>
                     <input
+                        type='Number'
                         className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter Pincode"
                         value={pincode}
@@ -62,7 +63,7 @@ const PropModalStep2 = ({ formData, setFormData, onBack,  onNext }) => {
                     />
                 </div>
                 <div className="flex flex-col mb-4">
-                    <label className="text-sm font-medium text-gray-700 mb-1">Landmark</label>
+                    <label className="text-sm font-medium text-gray-700 mb-1">Landmark*</label>
                     <input
                         className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter Landmark"

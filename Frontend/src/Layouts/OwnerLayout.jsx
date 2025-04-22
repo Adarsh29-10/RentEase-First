@@ -4,7 +4,6 @@ import {Sidebar , SidebarItem} from '../components/Nav/Sidebar'
 import { BarChart2, BarChart3, LayoutDashboard, LifeBuoy, Receipt, ReceiptIndianRupee, Settings, Settings2 } from 'lucide-react'
 
 const OwnerLayout = () => {
-    const [isSideNavOpen, setIsSideNavOpen] = useState(false)
     
     return (
         <div className=' h-screen flex  '>

@@ -27,7 +27,7 @@ const LoginForm = () => {
 
         // Navigate to the appropriate dashboard based on the role
         if (role === 'owner') {
-          navigate('/Owner');
+          navigate('/OwnerDashboard');
         } else if (role === 'tenant') {
           navigate('/TenantDashboard');
         } else {

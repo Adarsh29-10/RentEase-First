@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import Header from '../components/others/Header.jsx'
-import RoomView from './RoomView.jsx'
+import RoomView from './RoomView.jsx';
 import RCard from '../components/others/Room-card/RCard.jsx'
-import AddRoomModal from '../components/TaskList/AddRoomModal.jsx';
+import AddRoomModal from '../components/Modals/RoomModal/RoomModal.jsx';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 
@@ -34,7 +33,6 @@ const Rooms = ({data}) => {
 
   return (
     <div className='h-screen overflow-x-hidden max-w-full mx-auto py-8 px-4 '>
-        {/* <Header /> */}
         <div className= 'bg-transparent mb-8 flex align-center justify-between w-full'>
             <h1 className='font-bold text-3xl font-sans'>Rooms Dashboard {property.name}
             </h1>

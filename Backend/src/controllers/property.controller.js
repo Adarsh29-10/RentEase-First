@@ -3,7 +3,6 @@ import { ApiResponses } from '../utils/ApiResponses.js';
 import { ApiError } from '../utils/ApiError.js';
 import { Property } from '../models/property.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
-import fs from 'fs';
 
 const addNewProperty = asyncHandler(async (req, res) => {
   const {
@@ -15,10 +14,7 @@ const addNewProperty = asyncHandler(async (req, res) => {
     pincode,
     landmark,
     amenities,
-    isFurnitured,
     propertyType,
-    rentType,
-    rentAmount
   } = req.body;
 
   // ✅ Validate required text fields
@@ -56,8 +52,8 @@ const addNewProperty = asyncHandler(async (req, res) => {
       ) {
       propertyImageLocalPath = req.files.propertyImages[0].path;
   }
-  console.log(propertyImageLocalPath);
-  console.log(req.files);
+  // console.log(propertyImageLocalPath);
+  // console.log(req.files);
 
   if(!propertyImageLocalPath){
     throw new ApiError(500, "Local path is required");
@@ -76,10 +72,7 @@ const addNewProperty = asyncHandler(async (req, res) => {
     pincode,
     landmark,
     amenities,
-    isFurnitured,
     propertyType,
-    rentType,
-    rentAmount,
     propertyImages: propertyImage?.url
   });
 
@@ -92,7 +85,37 @@ const addNewProperty = asyncHandler(async (req, res) => {
 
 const getProperties = asyncHandler(async (req, res, next) => {
   // console.log("Entered")
-  const properties = await Property.find({ owner: req.user._id });
+  // const properties = await Property.find({ owner: req.user._id })
+  // .populate('owner').lean();
+  const properties = await Property.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerDetails"
+      }
+    }, 
+    { $unwind: "$ownerDetails" },
+    {
+      $project: {
+        title:1,
+        description:1,
+        street:1,
+        city:1,
+        state:1,
+        pincode:1,
+        landmark:1,
+        amenities:1,
+        propertyType:1,
+        propertyImages:1,
+        isAvailable: 1,
+        "ownerDetails.username": 1,
+        "ownerDetails.fullName": 1,
+        "ownerDetails.email": 1
+      }
+    }
+  ])
 
   if (!properties || properties.length === 0) {
     throw new ApiError(404, "No properties found for the verified user");
