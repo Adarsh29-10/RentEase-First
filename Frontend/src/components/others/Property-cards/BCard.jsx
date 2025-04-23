@@ -136,7 +136,7 @@ const BCard = ({
               View
             </button>
             <button 
-              onClick={() => navigate(`/OwnerDashboard/manage-rooms/${id}`)}
+              onClick={() => navigate(`/OwnerDashboard/rooms/${id}`)}
               className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md"
             >
               Manage

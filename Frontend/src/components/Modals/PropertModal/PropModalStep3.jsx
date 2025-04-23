@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 const PropModalStep3 = ({ formData, setFormData, onBack, onNext, onRentTypeChange }) => {
     // Remove local rentType state - use formData.rentType directly
-    const rentType = formData.rentType;
+    // const rentType = formData.rentType;
 
     const handleNext = () => {
         if (!rentType) {

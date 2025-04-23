@@ -1,24 +1,22 @@
-import Router from 'express'
-import { addNewRoom, getRooms } from '../controllers/room.controller.js'
-import {verifyJWT} from '../middlewares/auth.middleware.js'
-import {upload} from '../middlewares/multer.middleware.js'
+import Router from 'express';
+import { addNewRoom, getRoomsByProperty, getRooms } from '../controllers/room.controller.js';
+import { verifyJWT } from '../middlewares/auth.middleware.js';
+import { upload } from '../middlewares/multer.middleware.js';
 
-const router = Router()
+const router = Router();
 
-router.route('/add-new-room').post(
-    verifyJWT ,
-    upload.fields([
-        {
-            name: "roomImages",
-        }
-    ]),
+// Add new room to a property
+// console.log("entered")
+router.route('/new-room').post(
+    verifyJWT,
+    upload.fields([{ name: "roomImages", maxCount: 5 }]), // Allow up to 5 images
     addNewRoom
-)
+);
 
-router.route('/fetch-rooms').get(verifyJWT, getRooms)
+// // Get rooms for a specific property
+router.route('/rooms/:id').get(verifyJWT, getRoomsByProperty);
 
-// router.route('/delete-property').post(verifyJWT, deleteProperty)
-
-// router.route('/delete-all-property').post(verifyJWT, deleteAllProperty)
+// // Get all rooms (for admin purposes)
+router.route('/fetch-rooms').get( getRooms);
 
 export default router;

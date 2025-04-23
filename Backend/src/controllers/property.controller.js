@@ -22,7 +22,7 @@ const addNewProperty = asyncHandler(async (req, res) => {
     [
       title, description, street, city, state,
       pincode, amenities, 
-      propertyType, rentType, 
+      propertyType
     ].some(field => typeof field === "string" && field.trim() === "")
   ) {
     throw new ApiError(401, "All fields are required");
@@ -85,37 +85,37 @@ const addNewProperty = asyncHandler(async (req, res) => {
 
 const getProperties = asyncHandler(async (req, res, next) => {
   // console.log("Entered")
-  // const properties = await Property.find({ owner: req.user._id })
-  // .populate('owner').lean();
-  const properties = await Property.aggregate([
-    {
-      $lookup: {
-        from: "users",
-        localField: "owner",
-        foreignField: "_id",
-        as: "ownerDetails"
-      }
-    }, 
-    { $unwind: "$ownerDetails" },
-    {
-      $project: {
-        title:1,
-        description:1,
-        street:1,
-        city:1,
-        state:1,
-        pincode:1,
-        landmark:1,
-        amenities:1,
-        propertyType:1,
-        propertyImages:1,
-        isAvailable: 1,
-        "ownerDetails.username": 1,
-        "ownerDetails.fullName": 1,
-        "ownerDetails.email": 1
-      }
-    }
-  ])
+  const properties = await Property.find({ owner: req.user._id })
+  .populate('owner').lean();
+  // const properties = await Property.aggregate([
+  //   {
+  //     $lookup: {
+  //       from: "users",
+  //       localField: "owner",
+  //       foreignField: "_id",
+  //       as: "ownerDetails"
+  //     }
+  //   }, 
+  //   { $unwind: "$ownerDetails" },
+  //   {
+  //     $project: {
+  //       title:1,
+  //       description:1,
+  //       street:1,
+  //       city:1,
+  //       state:1,
+  //       pincode:1,
+  //       landmark:1,
+  //       amenities:1,
+  //       propertyType:1,
+  //       propertyImages:1,
+  //       isAvailable: 1,
+  //       "ownerDetails.username": 1,
+  //       "ownerDetails.fullName": 1,
+  //       "ownerDetails.email": 1
+  //     }
+  //   }
+  // ])
 
   if (!properties || properties.length === 0) {
     throw new ApiError(404, "No properties found for the verified user");

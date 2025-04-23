@@ -40,7 +40,7 @@ const App = () => {
           <Route path='profile' element={<Profile/>} />
 
           <Route path='property-details/:id' element={<ViewProperty />} />
-          <Route path='manage-rooms/:id' element={<Rooms />} />
+          <Route path='rooms/:id' element={<Rooms />} />
           <Route path='viewroom' element={<RoomView />} />
         </Route>
       </Route>

@@ -1,8 +1,8 @@
-import mongoose from 'mongoose'
+import mongoose, {Schema} from 'mongoose'
 
-const roomSchema = new mongoose.Schema({
-  property: {
-    type: mongoose.Schema.Types.ObjectId,
+const roomSchema = new Schema({
+  property_id: {
+    type: Schema.Types.ObjectId,
     ref: 'Property',
     required: true
   },
@@ -20,7 +20,7 @@ const roomSchema = new mongoose.Schema({
   
   tenantType: {
     type: String,
-    enum: ['Family', 'Bachelors', 'Others'],
+    // enum: ['Family', 'Bachelors', 'Others'],
     required: true
   },
 
@@ -47,9 +47,9 @@ const roomSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  furnishedStatus: {
-    type: String,
-    enum: ['Furnished', 'Semi-Furnished', 'Unfurnished'],
+  isFurnitured: {
+    type: Boolean,
+    // enum: ['Furnished', 'Semi-Furnished', 'Unfurnished'],
     required: true
   },
   hasAttachedBath: {
@@ -57,7 +57,8 @@ const roomSchema = new mongoose.Schema({
     default: false
   },
   roomImages: {
-    type: String // URL or image filename
+    type: [String], // Array of URLs or image filenames
+    required: true
   },
   description: {
     type: String

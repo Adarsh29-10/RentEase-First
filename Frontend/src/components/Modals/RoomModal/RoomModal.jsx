@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+import RoomModalStep1 from './RoomModalStep1'
+import RoomModalStep2 from './RoomModalStep2';
+import RoomModalStep3 from './RoomModalStep3';
+import RoomModalStep5 from './RoomModalStep5';
+import RoomModalStep4 from './RoomModalStep4';
+import RoomModalStep6 from './RoomModalStep6';
+import { api } from '../../../Utils/AxiosHelper';
+import { useParams } from 'react-router-dom';
 
-
-const RoomModal = ({ Close }) => {
+const RoomModal = ({ Close, propertyId  }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,10 +19,11 @@ const RoomModal = ({ Close }) => {
     rentAmount: "",
     maxOccupancy: "",
     currentOccupants: "",
-    furnishedStatus: "",
+    isFurnitured: "",
     hasAttachedBath: "",   
     roomImages: [],
     description: "",
+    propertyId
   });
 
 
@@ -37,52 +45,52 @@ const RoomModal = ({ Close }) => {
   };
 
   
-
   const handleSubmit = async (finalData) => {
     setIsSubmitting(true);
     console.log("Submitting form data...", finalData);
     
-    // try {
-    //   const formDataToSubmit = new FormData();
+    try {
+      const formDataToSubmit = new FormData();
       
-    //   // Append all non-file fields
-    //   Object.keys(formData).forEach(key => {
-    //     if (key !== 'propertyImages' && formData[key] !== undefined && formData[key] !== null) {
-    //       formDataToSubmit.append(key, formData[key]);
-    //     }
-    //   });
+      // Append all non-file fields
+      Object.keys(formData).forEach(key => {
+        if (key !== 'roomImages' && formData[key] !== undefined && formData[key] !== null) {
+          formDataToSubmit.append(key, formData[key]);
+        }
+      });
 
-    //   // Append files if they exist in finalData
-    //   if (finalData instanceof FormData) {
-    //     // If coming from Step6, it's already FormData with files
-    //     for (let [key, value] of finalData.entries()) {
-    //       if (key === 'propertyImages') {
-    //         formDataToSubmit.append('propertyImages', value);
-    //       }
-    //     }
-    //   } else if (finalData.propertyImages && finalData.propertyImages.length > 0) {
-    //     // If coming from other steps with File objects
-    //     finalData.propertyImages.forEach(file => {
-    //       formDataToSubmit.append('propertyImages', file);
-    //     });
-    //   } else {
-    //     throw new Error("At least one image is required");
-    //   }
+      // Append files if they exist in finalData
+      if (finalData instanceof FormData) {
+        // If coming from Step6, it's already FormData with files
+        for (let [key, value] of finalData.entries()) {
+          if (key === 'roomImages') {
+            formDataToSubmit.append('roomImages', value);
+          }
+        }
+      } else if (finalData.propertyImages && finalData.propertyImages.length > 0) {
+        // If coming from other steps with File objects
+        finalData.propertyImages.forEach(file => {
+          formDataToSubmit.append('roomImages', file);
+        });
+      } else {
+        throw new Error("At least one image is required");
+      }
 
-    //   const response = await api.post("/properties/add-new-property", formDataToSubmit, {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data'
-    //     }
-    //   });
+      const response = await api.post(`rooms/new-room`, formDataToSubmit,  {
+
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       
-    //   alert("Property Submitted Successfully");
-    //   Close();
-    // } catch (err) {
-    //   console.error("Submission error:", err);
-    //   alert(`Failed to add new property: ${err.response?.data?.message || err.message}`);
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      alert("Room Submitted Successfully");
+      Close();
+    } catch (err) {
+      console.error("Submission error:", err);
+      alert(`Failed to add new room: ${err.response?.data?.message || err.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -103,44 +111,56 @@ const RoomModal = ({ Close }) => {
 
         <div className="p-6">
           {currentStep === 1 && (
-            <PropModalStep1
+            <RoomModalStep1
               formData={formData}
               setFormData={setFormData}
               onNext={handleNext}
             />
           )}
-
-          {/* {currentStep === 2 && (
-            <PropModalStep2
+          {currentStep === 2 && (
+            <RoomModalStep2
               formData={formData}
               setFormData={setFormData}
               onBack={handleBack}
               onNext={handleNext}
             />
           )}
-
-         
-
           {currentStep === 3 && (
-            <PropModalStep4
+            <RoomModalStep3
               formData={formData}
               setFormData={setFormData}
               onBack={handleBack}
               onNext={handleNext}
+            />
+          )}
+          {currentStep === 4 && (
+            <RoomModalStep4
+              formData={formData}
+              setFormData={setFormData}
+              onBack={handleBack}
+              onNext={handleNext}
+            />
+          )}
+          {currentStep === 5 && (
+            <RoomModalStep5
+              formData={formData}
+              setFormData={setFormData}
+              onBack={handleBack}
+              onNext={handleNext}
+            />
+          )}
+          {currentStep === 6 && (
+            <RoomModalStep6
+              formData={formData}
+              setFormData={setFormData}
+              onBack={handleBack}
+              onNext={handleNext}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
             />
           )}
 
           
-
-          {currentStep === 4 && (
-            <PropModalStep6
-              formData={formData}
-              setFormData={setFormData}
-              onBack={handleBack}
-              onSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-            />
-          )} */}
         </div>
       </div>
     </div>
