@@ -77,6 +77,26 @@ const addNewRoom = asyncHandler(async (req, res) => {
     );
 });
 
+
+const getRoomsByProperty = asyncHandler(async (req, res) => {
+  const propertyId = req.params.id;
+
+  if (!propertyId) {
+      throw new ApiError(400, "Property ID is required");
+  }
+
+  const rooms = await Room.find({ property_id: propertyId });
+
+  if (!rooms || rooms.length === 0) {
+      throw new ApiError(404, "No rooms found for this property");
+  }
+
+  return res.status(200).json(
+      new ApiResponses(200, rooms, "Rooms retrieved successfully")
+  );
+});
+
+
 const getRooms = asyncHandler(async (req, res, next) => {
   
   const rooms = await Property.aggregate([
@@ -115,23 +135,7 @@ const getRooms = asyncHandler(async (req, res, next) => {
   ));
 });
 
-const getRoomsByProperty = asyncHandler(async (req, res) => {
-  const propertyId = req.params.id;
 
-  if (!propertyId) {
-      throw new ApiError(400, "Property ID is required");
-  }
-
-  const rooms = await Room.find({ property_id: propertyId });
-
-  if (!rooms || rooms.length === 0) {
-      throw new ApiError(404, "No rooms found for this property");
-  }
-
-  return res.status(200).json(
-      new ApiResponses(200, rooms, "Rooms retrieved successfully")
-  );
-});
 
 export { 
     addNewRoom, 
