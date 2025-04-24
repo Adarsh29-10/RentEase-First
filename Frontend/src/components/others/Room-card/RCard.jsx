@@ -44,8 +44,16 @@ const RCard = ({  }) => {
                 <div className="bg-white p-4 px-20">
                     <p className='text-gray-700 tracking-widest mb-12 border-b-2 py-3'>Double Room at 2nd Floor, Furnitured and Bathroom Attached with Discription as "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed, fugit."</p>
                     
-                    <div className="  ">
-                        <h1 className=' text-2xl font-sans font-semibold text-gray-700 '>Tenant Dashboard </h1>
+
+
+                    <div className='bg-transparent mb-8 flex align-center justify-between max-w-4xl '>
+                       <h1 className=' text-2xl font-sans font-semibold text-gray-700 '>Tenant Dashboard </h1>
+
+                      <button 
+                          className="flex items-center bg-blue-700 hover:bg-blue-600 px-6 py-2 rounded-xl text-white transition-colors "
+                      >
+                          Assign Tenant
+                      </button>
                     </div>
                 </div>
             )}

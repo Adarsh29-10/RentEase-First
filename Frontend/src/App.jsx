@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 // import axios from 'axios';
 import OwnerDashboard from './components/Dashboard/OwnerDashboard';
 
-import Rooms from './pages/Rooms';
+import RoomDashboard from './pages/RoomDashboard';
 import TenantDashboard from './components/Dashboard/TenantDashboard';
 
 import AuthPage from './pages/AuthPage';
@@ -40,7 +40,7 @@ const App = () => {
           <Route path='profile' element={<Profile/>} />
 
           <Route path='property-details/:id' element={<ViewProperty />} />
-          <Route path='rooms/:id' element={<Rooms />} />
+          <Route path='rooms/:id' element={<RoomDashboard />} />
           <Route path='viewroom' element={<RoomView />} />
         </Route>
       </Route>

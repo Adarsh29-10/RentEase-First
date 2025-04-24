@@ -4,7 +4,7 @@ import RCard from '../components/others/Room-card/RCard.jsx';
 import AddRoomModal from '../components/Modals/RoomModal/RoomModal.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const Rooms = () => {
+const RoomDashboard = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [isModelOpen, setIsModelOpen] = useState(false);
@@ -29,7 +29,7 @@ const Rooms = () => {
                 </button>
             </div>
             
-            <div className="bg-white rounded-lg shadow-md p-6 mb-6  " >
+            <div  >
                 {/* {rooms.length === 0 ? (
                     <div className="text-center py-8">
                         <p className="text-gray-500">No rooms found for this property.</p>
@@ -70,4 +70,4 @@ const Rooms = () => {
     );
 };
 
-export default Rooms;
+export default RoomDashboard;
