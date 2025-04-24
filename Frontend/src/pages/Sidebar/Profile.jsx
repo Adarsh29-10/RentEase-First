@@ -8,7 +8,8 @@ import {
   FileText,
   Edit2,
   Save,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 
 const Profile = () => {
@@ -114,7 +115,15 @@ const Profile = () => {
                                 </button>
                             )}
                         </div>
+                        
                     </div>
+                    <button
+                        onClick={()=> navigate('/')}
+                        className="flex items-center  px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-blue-700"
+                    >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Logout
+                    </button>
                 </div>
 
                 {/* Profile Details */}
