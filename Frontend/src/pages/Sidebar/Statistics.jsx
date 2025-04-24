@@ -2,58 +2,38 @@ import React from 'react';
 
 const Statistics = () => {
     return (
-        <div className='p-10'>
-
-            <div className="stats shadow ">
-                <div className="stat">
-                    <div className="stat-figure text-primary">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="inline-block h-8 w-8 stroke-current">
-                        <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
-                    </div>
-                    <div className="stat-title">Total Likes</div>
-                    <div className="stat-value text-primary">25.6K</div>
-                    <div className="stat-desc">21% more than last month</div>
+        <div className="max-w-full mx-auto py-8 px-4">
+            <h1 className="font-bold text-3xl text-center mb-8 text-indigo-600">Statistics</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Card 1 */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-indigo-500">
+                    <h2 className="text-xl font-semibold text-gray-700">Total Properties</h2>
+                    <p className="text-4xl font-bold text-indigo-600 mt-4">10</p>
                 </div>
-
-                <div className="stat">
-                    <div className="stat-figure text-secondary">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        className="inline-block h-8 w-8 stroke-current">
-                        <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                    </div>
-                    <div className="stat-title">Page Views</div>
-                    <div className="stat-value text-secondary">2.6M</div>
-                    <div className="stat-desc">21% more than last month</div>
+                {/* Card 2 */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-green-500">
+                    <h2 className="text-xl font-semibold text-gray-700">Active Users</h2>
+                    <p className="text-4xl font-bold text-green-600 mt-4">45</p>
                 </div>
-
-                <div className="stat">
-                    <div className="stat-figure text-secondary">
-                    <div className="avatar online">
-                        <div className="w-16 rounded-full">
-                        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
-                    </div>
-                    </div>
-                    <div className="stat-value">86%</div>
-                    <div className="stat-title">Tasks done</div>
-                    <div className="stat-desc text-secondary">31 tasks remaining</div>
+                {/* Card 3 */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-yellow-500">
+                    <h2 className="text-xl font-semibold text-gray-700">Rooms Booked</h2>
+                    <p className="text-4xl font-bold text-yellow-600 mt-4">30</p>
+                </div>
+                {/* Card 4 */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-red-500">
+                    <h2 className="text-xl font-semibold text-gray-700">Pending Requests</h2>
+                    <p className="text-4xl font-bold text-red-600 mt-4">7</p>
+                </div>
+                {/* Card 5 */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-purple-500">
+                    <h2 className="text-xl font-semibold text-gray-700">Revenue</h2>
+                    <p className="text-4xl font-bold text-purple-600 mt-4">RS. 12,000</p>
+                </div>
+                {/* Card 6 */}
+                <div className="bg-white shadow-lg rounded-lg p-6 border-t-4 border-blue-500">
+                    <h2 className="text-xl font-semibold text-gray-700">New Listings</h2>
+                    <p className="text-4xl font-bold text-blue-600 mt-4">30</p>
                 </div>
             </div>
         </div>

@@ -129,12 +129,12 @@ const BCard = ({
             )}
           </div>
           <div className="flex space-x-2">
-            <button 
+            {/* <button 
               onClick={() => navigate(`/OwnerDashboard/property-details/${id}`)}
               className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md"
             >
               View
-            </button>
+            </button> */}
             <button 
               onClick={() => navigate(`/OwnerDashboard/rooms/${id}`)}
               className="px-3 py-1 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md"

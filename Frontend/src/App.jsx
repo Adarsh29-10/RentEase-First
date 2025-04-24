@@ -28,7 +28,7 @@ const App = () => {
       <Route path='/' element={<Navigate to = "/auth" />} />
       <Route path='/auth' element={<AuthPage />} />
 
-      <Route path='/TenantDashboard' element={<TenantDashboard/>} />
+      
 
       <Route element={<MainLayout />}>
         <Route path='/OwnerDashboard' element={< OwnerLayout />}>
@@ -45,7 +45,7 @@ const App = () => {
         </Route>
       </Route>
        
-      
+      <Route path='/TenantDashboard' element={<TenantDashboard/>} />
 
     </Routes>
   );

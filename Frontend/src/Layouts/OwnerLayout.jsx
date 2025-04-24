@@ -24,14 +24,14 @@ const OwnerLayout = () => {
             <SidebarItem 
               icon={ <ReceiptIndianRupee size={20} /> }
               text={"Billings"}  
-              alert
+              // alert
               to = "/OwnerDashboard/Billings"
             />
 
             <SidebarItem 
               icon={ <Settings size={20} /> }
               text={"Settings"}  
-              alert
+              // alert
               to = "/OwnerDashboard/Settings"
             />
 
