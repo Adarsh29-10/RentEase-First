@@ -16,6 +16,11 @@ import Help from './pages/Sidebar/Help';
 import ViewProperty from './pages/ViewProperty';
 import MainLayout from './Layouts/MainLayout';
 import RoomView from './pages/RoomView';
+import TenantLayout from './Layouts/TenantLayout';
+import TenantProfile from './pages/TenantSidebar/TenantProfile';
+import SearchProperties from './pages/TenantSidebar/SearchProperties';
+import TenantStatistics from './pages/TenantSidebar/TenantStatistics';
+import TenantBillings from './pages/TenantSidebar/TenantBillings';
 
 
 
@@ -42,6 +47,19 @@ const App = () => {
           <Route path='property-details/:id' element={<ViewProperty />} />
           <Route path='rooms/:id' element={<RoomDashboard />} />
           <Route path='viewroom' element={<RoomView />} />
+        </Route>
+
+        <Route path='/TenantDashboard' element={< TenantLayout />}>
+          <Route index element={< TenantDashboard />} />
+
+          <Route path='Search' element={<SearchProperties />} />
+          <Route path='Statistics' element={<TenantStatistics />} />
+          <Route path='Billings' element={<TenantBillings />} />
+          <Route path='Settings' element={<Settings />} />
+          <Route path='Help' element={<Help />} />
+          <Route path='profile' element={<TenantProfile/>} />
+
+          
         </Route>
       </Route>
        

@@ -1,8 +1,11 @@
 import React from 'react'
+import TenantCards from '../others/Property-cards/TenantCards'
 
 const TenantDashboard = () => {
   return (
-    <div>Tenant</div>
+    <div className='p-6'>
+      <TenantCards/>
+    </div>
   )
 }
 
